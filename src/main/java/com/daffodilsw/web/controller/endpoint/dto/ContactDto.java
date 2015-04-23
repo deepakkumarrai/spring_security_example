@@ -5,6 +5,8 @@ package com.daffodilsw.web.controller.endpoint.dto;
  */
 public class ContactDto {
 
+    private Long contactId;
+
     private String firstName;
 
     private String lastName;
@@ -73,5 +75,13 @@ public class ContactDto {
 
     public void setAppAdmin(Boolean appAdmin) {
         this.appAdmin = appAdmin;
+    }
+
+    public Long getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(Long contactId) {
+        this.contactId = contactId;
     }
 }

@@ -10,29 +10,29 @@ import java.io.Serializable;
 @Embeddable
 public class ConnectionId implements Serializable {
     @Column(name = "`FIRST_ID`", nullable = false)
-    private String first;
+    private Long first;
 
     @Column(name = "`LAST_ID`", nullable = false)
-    private String last;
+    private Long last;
 
-    public String getFirst() {
+    public Long getFirst() {
         return first;
     }
 
-    public String getLast() {
+    public Long getLast() {
         return last;
     }
 
-    public ConnectionId(String first, String last) {
+    public ConnectionId(Long first, Long last) {
         this.first = first;
         this.last = last;
     }
 
-    public void setFirst(String id) {
+    public void setFirst(Long id) {
         this.first = id;
     }
 
-    public void setLast(String ownerId) {
+    public void setLast(Long ownerId) {
         this.last = ownerId;
     }
 

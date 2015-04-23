@@ -8,4 +8,5 @@ import com.daffodilsw.core.data.model.User;
 public interface UserService {
 
     User getOneByPrincipleAndCredentials(String principle, String credentials);
+
 }
