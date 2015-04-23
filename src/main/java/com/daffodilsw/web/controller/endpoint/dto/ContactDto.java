@@ -1,42 +1,24 @@
-package com.daffodilsw.core.data.jpa.model;
-
-import com.daffodilsw.core.data.model.User;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+package com.daffodilsw.web.controller.endpoint.dto;
 
 /**
- * Created by user on 16/4/15.
+ * Created by user on 23/4/15.
  */
-@Entity
-@Table(name = "USER")
-public class JpaUser extends JpaModelAuto implements User {
+public class ContactDto {
 
-    private static final long serialVersionUID = -7131097387807386185L;
-
-    @Column(name = "FIRST_NAME")
     private String firstName;
 
-    @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
 
-    @Column(name = "USER_NAME")
     private String userName;
 
-    @Column(name = "PASSWORD")
     private String password;
 
-    @Column(name = "IS_ADMIN")
     private Boolean appAdmin;
 
-    @Override
     public String getFirstName() {
         return firstName;
     }
@@ -45,7 +27,6 @@ public class JpaUser extends JpaModelAuto implements User {
         this.firstName = firstName;
     }
 
-    @Override
     public String getLastName() {
         return lastName;
     }
@@ -54,7 +35,6 @@ public class JpaUser extends JpaModelAuto implements User {
         this.lastName = lastName;
     }
 
-    @Override
     public String getEmail() {
         return email;
     }
@@ -63,7 +43,6 @@ public class JpaUser extends JpaModelAuto implements User {
         this.email = email;
     }
 
-    @Override
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -72,17 +51,6 @@ public class JpaUser extends JpaModelAuto implements User {
         this.phoneNumber = phoneNumber;
     }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-
-    @Override
     public String getUserName() {
         return userName;
     }
@@ -91,9 +59,16 @@ public class JpaUser extends JpaModelAuto implements User {
         this.userName = userName;
     }
 
-    @Override
-    public Boolean isAppAdmin() {
-        return this.appAdmin;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getAppAdmin() {
+        return appAdmin;
     }
 
     public void setAppAdmin(Boolean appAdmin) {
