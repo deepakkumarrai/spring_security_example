@@ -3,6 +3,7 @@ package com.daffodilsw.web.security;
 import com.daffodilsw.core.data.jpa.service.UserService;
 import com.daffodilsw.core.data.model.User;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 
@@ -20,11 +21,17 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         if (authentication instanceof UserAuthentication) {
-            User user = userService.getOneByPrincipleAndCredentials((String) authentication.getPrincipal(),
-                    (String) authentication.getCredentials());
-            if (user != null) {
-                return new UserAuthentication(user);
+            if (authentication.isAuthenticated()) {
+                return authentication;
+            } else {
+                User user = userService.getOneByPrincipleAndCredentials((String) authentication.getPrincipal(),
+                        (String) authentication.getCredentials());
+                if (user != null) {
+                    return new UserAuthentication(user);
+                }
             }
+        } else {
+            throw new BadCredentialsException("Not able to authenticate the user.");
         }
         return null;
     }

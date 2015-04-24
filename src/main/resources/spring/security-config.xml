@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <security:http security="none" use-expressions="true" pattern="/(js|css|img)/.+" request-matcher="regex"/>
+
+    <security:http use-expressions="true" request-matcher="regex" entry-point-ref="securityEntryPoint">
+        <security:intercept-url pattern="/feed/.+" access="permitAll"/>
+        <security:logout logout-url="/user/logout" invalidate-session="true" logout-success-url="/user/login"/>
+        <security:custom-filter ref="userAuthenticationFilter" after="FORM_LOGIN_FILTER"/>
+    </security:http>
+
+    <bean id="securityEntryPoint" class="com.daffodilsw.web.security.EntryPoint"/>
+
+    <bean id="authenticationProvider" class="com.daffodilsw.web.security.UserAuthenticationProvider">
+        <constructor-arg name="userService" value="userService"/>
+    </bean>
+
+    <bean id="userAuthenticationFilter" class="com.daffodilsw.web.security.UserAuthenticationFilter">
+        <constructor-arg name="authenticationManager" ref="org.springframework.security.authenticationManager"/>
+    </bean>
+
+    <security:authentication-manager id="org.springframework.security.authenticationManager">
+        <security:authentication-provider ref="authenticationProvider"/>
+    </security:authentication-manager>
+
+    <security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
+</beans>

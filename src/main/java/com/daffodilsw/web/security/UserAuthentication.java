@@ -62,6 +62,9 @@ public class UserAuthentication implements Authentication {
 
     @Override
     public Object getPrincipal() {
+        if (isAuthenticated) {
+            return user;
+        }
         return this.userName;
     }
 
